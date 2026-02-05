@@ -12,7 +12,7 @@ options:
   message: "Hello world..."
 schema:
   message: "str?"
-image: "ghcr.io/home-assistant/{arch}-addon-example"
+image: "ghcr.io/home-assistant/amd64-base-debian:latest"
 privileged:
   - BPF
   - CHECKPOINT_RESTORE

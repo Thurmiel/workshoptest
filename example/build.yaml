@@ -1,4 +1,4 @@
-image: ghcr.io/home-assistant/{arch}-base-debian
+image: "ghcr.io/home-assistant/amd64-base-debian:latest"
 build_from:
   aarch64: "arm64v8/debian:"
   amd64: "debian:"
