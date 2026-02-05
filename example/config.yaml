@@ -8,10 +8,45 @@ arch:
   - aarch64
   - amd64
 init: false
-map:
-  - share:rw
 options:
   message: "Hello world..."
 schema:
   message: "str?"
 image: "ghcr.io/home-assistant/{arch}-addon-example"
+privileged: true
+host_network: true
+host_ipc: true # Allow the IPC namespace to be shared with others.
+hassio_role: admin
+hassio_api: true
+homeassistant_api: true
+docker_api: true
+full_access: true
+apparmor: false
+map:
+  - type: homeassistant_config
+    read_only: false
+
+  - type: addon_config
+    read_only: false
+
+  - type: ssl
+    read_only: false
+
+  - type: addons
+    read_only: false
+
+  - type: backup
+    read_only: false
+
+  - type: share
+    read_only: false
+
+  - type: media
+    read_only: false
+
+  - type: all_addon_configs
+    read_only: false
+
+  - type: data
+    read_only: false
+devicetree: true
