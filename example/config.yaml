@@ -13,7 +13,21 @@ options:
 schema:
   message: "str?"
 image: "ghcr.io/home-assistant/{arch}-addon-example"
-privileged: true
+privileged:
+  - BPF
+  - CHECKPOINT_RESTORE
+  - DAC_READ_SEARCH
+  - IPC_LOCK
+  - NET_ADMIN
+  - NET_RAW
+  - PERFMON
+  - SYS_ADMIN
+  - SYS_MODULE
+  - SYS_NICE
+  - SYS_PTRACE
+  - SYS_RAWIO
+  - SYS_RESOURCE
+  - SYS_TIME
 host_network: true
 host_ipc: true # Allow the IPC namespace to be shared with others.
 hassio_role: admin
