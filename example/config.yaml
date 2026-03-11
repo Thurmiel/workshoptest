@@ -13,7 +13,7 @@ options:
 schema:
   message: "str?"
 # Nota: durante desarrollo, comenta esta línea para que supervisor construya el addon
-image: "ghcr.io/homeassistant/{arch}-addon-example:latest"
+image: "ghcr.io/home-assistant/{arch}-addon-example:latest"
 privileged:
   - BPF
   - CHECKPOINT_RESTORE
