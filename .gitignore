@@ -1,0 +1,11 @@
+# Home Assistant Addon build files
+.DS_Store
+*.swp
+*.swo
+*~
+.env
+.vscode/
+.idea/
+
+# Docker
+docker-compose.override.yml

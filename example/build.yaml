@@ -1,7 +1,7 @@
-image: "ghcr.io/home-assistant/{arch}-base-debian"
+image: "ghcr.io/homeassistant/{arch}-base-debian"
 build_from:
-  aarch64: "arm64v8/debian:"
-  amd64: "debian:"
+  aarch64: "ghcr.io/homeassistant/aarch64-base-debian:latest"
+  amd64: "ghcr.io/homeassistant/amd64-base-debian:latest"
 cosign:
   identity: https://github.com/home-assistant/docker-base/.*
 args:

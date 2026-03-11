@@ -3,7 +3,7 @@ name: Example add-on
 version: "2.0.0"
 slug: example
 description: Example add-on
-url: "https://github.com/home-assistant/addons-example/tree/main/example"
+url: "https://github.com/Thurmiel/workshoptest/tree/main/example"
 arch:
   - aarch64
   - amd64
@@ -12,7 +12,8 @@ options:
   message: "Hello world..."
 schema:
   message: "str?"
-image: "ghcr.io/home-assistant/{arch}-base-debian"
+# Nota: durante desarrollo, comenta esta línea para que supervisor construya el addon
+image: "ghcr.io/homeassistant/{arch}-addon-example:latest"
 privileged:
   - BPF
   - CHECKPOINT_RESTORE
