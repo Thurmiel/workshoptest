@@ -36,8 +36,12 @@ jobs:
         id: meta
         run: |
           VERSION=$(cat ${{ matrix.addon }}/config.yaml | grep "^version:" | sed 's/version: "//' | sed 's/".*//')
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMG="ghcr.io/${OWNER}/${{ matrix.addon }}"
+          IMG_LOWER=$(echo "$IMG" | tr '[:upper:]' '[:lower:]')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "image=ghcr.io/${{ github.repository_owner }}/${{ matrix.addon }}" >> $GITHUB_OUTPUT
+          echo "image=$IMG" >> $GITHUB_OUTPUT
+          echo "image_lower=$IMG_LOWER" >> $GITHUB_OUTPUT
 
       - name: Build and push for amd64
         uses: docker/build-push-action@v5
@@ -47,8 +51,8 @@ jobs:
           platforms: linux/amd64
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           tags: |
-            ${{ steps.meta.outputs.image }}:latest
-            ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.version }}
+            ${{ steps.meta.outputs.image_lower }}:latest
+            ${{ steps.meta.outputs.image_lower }}:${{ steps.meta.outputs.version }}
           labels: |
             org.opencontainers.image.title=${{ matrix.addon }}
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
@@ -61,8 +65,8 @@ jobs:
           platforms: linux/arm64
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           tags: |
-            ${{ steps.meta.outputs.image }}:latest
-            ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.version }}
+            ${{ steps.meta.outputs.image_lower }}:latest
+            ${{ steps.meta.outputs.image_lower }}:${{ steps.meta.outputs.version }}
           labels: |
             org.opencontainers.image.title=${{ matrix.addon }}
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}

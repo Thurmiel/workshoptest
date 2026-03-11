@@ -3,7 +3,7 @@ name: Example add-on
 version: "2.0.0"
 slug: example
 description: Example add-on
-url: "https://github.com/Thurmiel/workshoptest/tree/main/example"
+url: "https://github.com/thurmiel/workshoptest/tree/main/example"
 arch:
   - aarch64
   - amd64
