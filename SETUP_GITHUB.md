@@ -80,6 +80,11 @@ error similar a:
 > Nota: el archivo `builder.yaml` ya está incluido y emplea la acción oficial
 > `home-assistant/builder`. Es el método recomendado para proyectos que siguen
 > las guías de Home Assistant. Puedes conservar o eliminar `build.yml` según tu preferencia.
+>
+> El flujo `builder.yaml` normalmente comprueba si algún fichero relevante ha
+> cambiado y, si no es así, salta el job de compilación.  Hemos desactivado esa
+> verificación para que siempre reconstruya el add-on en cada push; así no te
+> preocupas por tocar un archivo en particular.
 
 3. Espera a que termine (puede tomar 10-15 minutos)
 

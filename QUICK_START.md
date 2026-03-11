@@ -70,6 +70,9 @@ git push -u origin main
 - [ ] Verás uno o dos workflows corriendo:
   - "Build Home Assistant Add-ons" (ejemplo manual)
   - "Builder" (usa el builder oficial, recomendado)
+
+> El builder está configurado para ejecutarse **siempre** en cada push, no
+> sólo cuando cambian ciertos archivos.
 - [ ] **Espera a que termine** (10-15 minutos)
 - [ ] Verifica que **"All checks passed"**
 
