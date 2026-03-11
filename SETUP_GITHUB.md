@@ -4,6 +4,17 @@ Sigue estos pasos para que tu addon sea completamente funcional y publicable:
 
 ## 1️⃣ Preparación Inicial
 
+> ⚠️ **Nota importante:** GitHub usa mayúsculas en tu nombre de usuario, pero
+docker/ghcr requiere que los repositorios sean *lowercase*. Si tu usuario
+contiene letras mayúsculas, el proceso de build local puede fallar con un
+error similar a:
+>
+> `invalid tag "ghcr.io/Thurmiel/example:latest": repository name must be lowercase`
+>
+> En tal caso, reemplaza el nombre de usuario en `repository.yaml` y en las
+> URLs por su versión en minúsculas (por ejemplo, `thurmiel`). El workflow de
+> GitHub Actions ya convierte a minúsculas automáticamente.
+
 ### Personaliza los archivos
 
 1. **repository.yaml** - Actualiza con tu información:
