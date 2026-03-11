@@ -43,7 +43,12 @@ jobs:
             echo "build_arch=false" >> $GITHUB_OUTPUT;
           elif [[ "${{ steps.info.outputs.architectures }}" =~ ${{ matrix.arch }} ]]; then
             echo "build_arch=true" >> $GITHUB_OUTPUT;
-            echo "image=$(echo ${{ steps.info.outputs.image }} | cut -d'/' -f3)" >> $GITHUB_OUTPUT;
+            # derive base image name (without tag) and owner lowercase
+            IMG="${{ steps.info.outputs.image }}"
+            # strip tag if present
+            IMG="${IMG%%:*}"
+            IMG_LOWER=$(echo "$IMG" | tr '[:upper:]' '[:lower:]')
+            echo "image=$IMG_LOWER" >> $GITHUB_OUTPUT;
             if [[ -z "${{ github.head_ref }}" ]] && [[ "${{ github.event_name }}" == "push" ]]; then
                 echo "BUILD_ARGS=" >> $GITHUB_ENV;
             fi
