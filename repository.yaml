@@ -1,4 +1,4 @@
 # https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
-name: Tu Repositorio de Add-ons
-url: 'https://github.com/thurmiel/workshoptest'
-maintainer: Mario
+name: My Home Assistant Add-ons
+url: 'https://github.com/<YOUR_USERNAME>/<YOUR_REPO>'
+maintainer: Your Name

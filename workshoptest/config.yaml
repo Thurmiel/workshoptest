@@ -1,0 +1,15 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Workshop Test
+version: "1.0.0"
+slug: workshoptest
+description: A workshop test add-on
+url: "https://github.com/<YOUR_USERNAME>/<YOUR_REPO>/tree/main/workshoptest"
+arch:
+  - aarch64
+  - amd64
+init: false
+options:
+  message: "Hello world..."
+schema:
+  message: "str?"
+image: "ghcr.io/homeassistant/{arch}-base-debian:latest"

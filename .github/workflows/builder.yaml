@@ -1,8 +1,4 @@
-name: Builder
-
-env:
-  BUILD_ARGS: "--test"
-  MONITORED_FILES: "build.yaml config.yaml Dockerfile rootfs"
+name: Build Add-ons
 
 on:
   push:
@@ -15,87 +11,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build ${{ matrix.arch }} ${{ matrix.addon }} add-on
     strategy:
       matrix:
         addon:
-          - example
-        arch: ["aarch64", "amd64"]
+          - workshoptest
     permissions:
       contents: read
       packages: write
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v6.0.2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Get information
-        id: info
-        uses: home-assistant/actions/helpers/info@master
-        with:
-          path: "./${{ matrix.addon }}"
-
-      - name: Check if add-on should be built
-        id: check
-        run: |
-          if [[ "${{ steps.info.outputs.image }}" == "null" ]]; then
-            echo "Image property is not defined, skipping build"
-            echo "build_arch=false" >> $GITHUB_OUTPUT;
-          elif [[ "${{ steps.info.outputs.architectures }}" =~ ${{ matrix.arch }} ]]; then
-            echo "build_arch=true" >> $GITHUB_OUTPUT;
-            # derive base image name (without tag) and owner lowercase
-            IMG="${{ steps.info.outputs.image }}"
-            # strip tag if present
-            IMG="${IMG%%:*}"
-            IMG_LOWER=$(echo "$IMG" | tr '[:upper:]' '[:lower:]')
-            echo "image=$IMG_LOWER" >> $GITHUB_OUTPUT;
-            if [[ -z "${{ github.head_ref }}" ]] && [[ "${{ github.event_name }}" == "push" ]]; then
-                echo "BUILD_ARGS=" >> $GITHUB_ENV;
-            fi
-          else
-            echo "${{ matrix.arch }} is not a valid arch for ${{ matrix.addon }}, skipping build";
-            echo "build_arch=false" >> $GITHUB_OUTPUT;
-          fi
-
-      - name: Patch config.yaml with final image
-        if: steps.check.outputs.build_arch == 'true'
-        run: |
-          # owner lowercase
-          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          # image output already contains repo name (e.g. aarch64-addon-example)
-          REPO="${{ steps.check.outputs.image }}"
-          ADDON="${{ matrix.addon }}"
-          VERSION=$(grep '^version:' "${ADDON}/config.yaml" | sed 's/.*"\(.*\)".*/\1/')
-          FINAL="ghcr.io/${OWNER}/${REPO}:${VERSION}"
-          echo "Setting image to ${FINAL} in ${ADDON}/config.yaml"
-          # replace the image line whether commented or not
-          sed -i "s|^#\? image:.*|image: \"${FINAL}\"|" "${ADDON}/config.yaml"
-
-      - name: Commit updated config
-        if: steps.check.outputs.build_arch == 'true' && github.event_name == 'push'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "${{ matrix.addon }}/config.yaml"
-          git commit -m "chore: set image in config.yaml to ${FINAL}" || echo "no changes"
-          git push origin HEAD:main
-
-      - name: Login to GitHub Container Registry
-        if: env.BUILD_ARGS != '--test'
-        uses: docker/login-action@v3.6.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build ${{ matrix.addon }} add-on
-        if: steps.check.outputs.build_arch == 'true'
+      - name: Build add-on
         uses: home-assistant/builder@2025.11.0
         with:
           args: |
-            ${{ env.BUILD_ARGS }} \
-            --${{ matrix.arch }} \
-            --target /data/${{ matrix.addon }} \
-            --image "${{ steps.check.outputs.image }}" \
-            --docker-hub "ghcr.io/$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" \
-            --addon
+            --test \
+            --aarch64 \
+            --amd64 \
+            --target /data/${{ matrix.addon }}
