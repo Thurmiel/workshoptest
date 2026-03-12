@@ -62,9 +62,10 @@ jobs:
         run: |
           # owner lowercase
           OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          BASE="ghcr.io/${OWNER}/${{ matrix.addon }}"
+          # image output already contains repo name (e.g. aarch64-addon-example)
+          REPO="${{ steps.check.outputs.image }}"
           VERSION=$(grep '^version:' "${{ matrix.addon }}/config.yaml" | sed 's/.*"\(.*\)".*/\1/')
-          FINAL="${BASE}:${VERSION}"
+          FINAL="ghcr.io/${OWNER}/${REPO}:${VERSION}"
           echo "Setting image to ${FINAL} in ${matrix.addon}/config.yaml"
           # replace the image line whether commented or not
           sed -i "s|^#\? image:.*|image: \"${FINAL}\"|" "${{ matrix.addon }}/config.yaml"
