@@ -64,11 +64,12 @@ jobs:
           OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           # image output already contains repo name (e.g. aarch64-addon-example)
           REPO="${{ steps.check.outputs.image }}"
-          VERSION=$(grep '^version:' "${{ matrix.addon }}/config.yaml" | sed 's/.*"\(.*\)".*/\1/')
+          ADDON="${{ matrix.addon }}"
+          VERSION=$(grep '^version:' "${ADDON}/config.yaml" | sed 's/.*"\(.*\)".*/\1/')
           FINAL="ghcr.io/${OWNER}/${REPO}:${VERSION}"
-          echo "Setting image to ${FINAL} in ${matrix.addon}/config.yaml"
+          echo "Setting image to ${FINAL} in ${ADDON}/config.yaml"
           # replace the image line whether commented or not
-          sed -i "s|^#\? image:.*|image: \"${FINAL}\"|" "${{ matrix.addon }}/config.yaml"
+          sed -i "s|^#\? image:.*|image: \"${FINAL}\"|" "${ADDON}/config.yaml"
 
       - name: Commit updated config
         if: steps.check.outputs.build_arch == 'true' && github.event_name == 'push'
