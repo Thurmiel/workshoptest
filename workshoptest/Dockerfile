@@ -2,8 +2,6 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-ARG TEMPIO_VERSION BUILD_ARCH
-
 # -----------------------------------------------------------
 # Base tooling: aparentemente inocente, muy potente
 # -----------------------------------------------------------
@@ -28,14 +26,6 @@ RUN \
         openssl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-# -----------------------------------------------------------
-# tempio (oficial HA)
-# -----------------------------------------------------------
-RUN \
-    curl -sSLf -o /usr/bin/tempio \
-    "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}" \
-    && chmod +x /usr/bin/tempio
 
 # -----------------------------------------------------------
 # Copy root filesystem
