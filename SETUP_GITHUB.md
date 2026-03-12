@@ -125,6 +125,12 @@ Los usuarios pueden:
 
 ## 7️⃣ Flujo de Actualización Continuo
 
+> 🛠️ El workflow `builder.yaml` modifica automáticamente el campo `image` en
+> `example/config.yaml` cada vez que se construye una nueva versión. El archivo
+> se commitea y se empuja de vuelta al repositorio, así que el valor siempre
+> está actualizado con la imagen publicada.
+
+
 Para cada actualización:
 
 1. **Modifica** los archivos del addon
