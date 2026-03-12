@@ -41,5 +41,5 @@ jobs:
             ${{ github.event_name == 'pull_request' && '--test' || '' }} \
             --${{ matrix.arch }} \
             --target /data/${{ matrix.addon }} \
-            --image "${{ matrix.addon }}" \
-            --docker-hub "ghcr.io/${{ matrix.arch }}-${{ github.repository_owner }}"
+            --image "${{ matrix.arch }}-${{ matrix.addon }}" \
+            --docker-hub "ghcr.io/${{ github.repository_owner }}"
