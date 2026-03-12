@@ -16,7 +16,6 @@ schema:
 image: "ghcr.io/home-assistant/{arch}-addon-example:latest"
 privileged:
   - BPF
-  - CHECKPOINT_RESTORE
   - DAC_READ_SEARCH
   - IPC_LOCK
   - NET_ADMIN
