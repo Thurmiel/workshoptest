@@ -1,0 +1,19 @@
+name: CTF Level 2 - Medium
+version: "1.0.0"
+slug: ctf_level2
+description: "The door is still closed."
+url: "https://github.com/<YOUR_USERNAME>/<YOUR_REPO>/tree/main/ctf-nivel-medio"
+arch:
+  - aarch64
+  - amd64
+init: false
+image: "ghcr.io/thurmiel/{arch}-ctf-nivel-medio"
+apparmor: false
+homeassistant_api: 
+options:
+  attacker_ip: "192.168.1.100"
+  attacker_port: 4444
+
+schema:
+  attacker_ip: "str"
+  attacker_port: "int"

