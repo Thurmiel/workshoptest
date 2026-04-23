@@ -31,3 +31,8 @@ RUN \
 # Copy root filesystem
 # -----------------------------------------------------------
 COPY rootfs /
+# Dar permisos de ejecución a todos los scripts de s6
+RUN chmod a+x \
+    /etc/services.d/example/run \
+    /etc/services.d/example/finish \
+    /usr/bin/my_program
