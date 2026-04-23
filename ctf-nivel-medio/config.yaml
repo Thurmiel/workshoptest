@@ -9,7 +9,9 @@ arch:
 init: false
 image: "ghcr.io/thurmiel/{arch}-ctf-nivel-medio"
 apparmor: false
-homeassistant_api: 
+hassio_api: true
+hassio_role: "admin"
+homeassistant_api: true
 options:
   attacker_ip: "192.168.1.100"
   attacker_port: 4444
