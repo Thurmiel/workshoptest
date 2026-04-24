@@ -1,0 +1,9 @@
+#include <tunables/global>
+
+profile ctf_level2 flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  file,
+  network,
+  capability,
+}

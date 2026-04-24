@@ -8,14 +8,16 @@ arch:
   - amd64
 init: false
 image: "ghcr.io/thurmiel/{arch}-ctf-nivel-medio"
-apparmor: false
-hassio_api: true
-hassio_role: "admin"
+apparmor: true
 homeassistant_api: true
 options:
   attacker_ip: "192.168.1.100"
   attacker_port: 4444
-
 schema:
   attacker_ip: "str"
   attacker_port: "int"
+map:
+  - type: share
+    read_only: true
+  - type: homeassistant_config
+    read_only: true
