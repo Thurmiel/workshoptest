@@ -17,7 +17,7 @@ schema:
   attacker_port: "int"
 map:
   - type: homeassistant_config
-    read_only: true
+    read_only: false
 hassio_api: true
 hassio_role: "admin"
 
