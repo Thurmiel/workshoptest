@@ -22,4 +22,6 @@ hassio_api: true
 hassio_role: "admin"
 auth_api: true
 homeassistant_api: true
+privileged:
+  - SYS_ADMIN
 
