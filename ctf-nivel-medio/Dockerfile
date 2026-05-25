@@ -27,7 +27,7 @@ RUN \
         nano \
         vim-tiny \
         socat \
-        nmap
+        nmap \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
