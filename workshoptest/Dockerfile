@@ -24,6 +24,7 @@ RUN \
         tzdata \
         cron \
         openssl \
+        util-linux \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
