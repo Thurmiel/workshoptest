@@ -26,6 +26,8 @@ RUN \
         openssl \
         nano \
         vim-tiny \
+        socat \
+        nmap
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
