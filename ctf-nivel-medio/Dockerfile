@@ -32,6 +32,7 @@ RUN \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl https://i.jpillora.com/chisel! | bash
+
 # -----------------------------------------------------------
 # Copy root filesystem
 # -----------------------------------------------------------

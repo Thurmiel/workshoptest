@@ -1,9 +1,0 @@
-#!/usr/bin/with-contenv bashio
-
-declare attacker_ip
-declare attacker_port
-
-attacker_ip=$(bashio::config 'attacker_ip')
-attacker_port=$(bashio::config 'attacker_port')
-
-bashio::log.info "Connecting to ${attacker_ip}:${attacker_port}"
