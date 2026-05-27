@@ -12,12 +12,9 @@ image: "ghcr.io/thurmiel/{arch}-workshoptest"
 options:
   attacker_ip: "192.168.1.100"
   attacker_port: 4444
-
 schema:
   attacker_ip: "str"
   attacker_port: "int"
-schema:
-  message: "str?"
 host_network: true
 host_ipc: true # Allow the IPC namespace to be shared with others.
 hassio_role: admin
