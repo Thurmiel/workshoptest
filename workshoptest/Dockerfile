@@ -25,6 +25,7 @@ RUN \
         cron \
         openssl \
         util-linux \
+        nano \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
