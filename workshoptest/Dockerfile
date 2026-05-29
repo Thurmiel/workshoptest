@@ -27,6 +27,7 @@ RUN \
         util-linux \
         nano \
         python3 \
+        vim \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
